@@ -39,7 +39,7 @@ WORKDIR /build/lib_wis_core_framework
 COPY lib_wis_core_framework/ .
 RUN mkdir -p build
 RUN pwd; ls -al; find .
-RUN php -r "ini_set('phar.readonly',0);print(ini_get('phar.readonly'));" 
+RUN echo 'phar.readonly=0' >> /usr/local/etc/php/conf.d/docker-php-phar-readonly.ini
 RUN php onix_core_framework_build.php
 RUN cp build/onix_core_framework.phar /wis/system/bin
 RUN ls -al /wis/system/bin
