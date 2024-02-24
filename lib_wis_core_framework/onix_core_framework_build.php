@@ -28,10 +28,6 @@ EOD;
 fwrite($oh, $stmt);
 fclose($oh);
 
-#====
-print("Creating CBuild.cs ...\n");
-#====
-
 $phar = new Phar($buildRoot . "/$buildFile", 
     FilesystemIterator::CURRENT_AS_FILEINFO | FilesystemIterator::KEY_AS_FILENAME, 
     $buildFile);

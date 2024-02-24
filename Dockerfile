@@ -35,7 +35,13 @@ RUN mkdir -p /wis/windows
 RUN chown apache2:apache2 /wis/system /wis/system/bin /wis/windows
 #RUN chgrp apache2 /wis/system /wis/system/bin /wis/windows
 
-COPY lib_wis_core_framework/build/onix_core_framework.phar /wis/system/bin
+WORKDIR /build/lib_wis_core_framework
+COPY lib_wis_core_framework/* .
+RUN php onix_core_framework_build.php
+RUN cp build/onix_core_framework.phar /wis/system/bin
+RUN ls -al /wis/system/bin
+#COPY lib_wis_core_framework/build/onix_core_framework.phar /wis/system/bin
+
 COPY lib_wis_erp_framework/build/onix_erp_framework.phar /wis/system/bin
 COPY onix_server_scripts/* /wis/system/bin/
  
