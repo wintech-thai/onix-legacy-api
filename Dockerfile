@@ -37,6 +37,7 @@ RUN chown apache2:apache2 /wis/system /wis/system/bin /wis/windows
 
 WORKDIR /build/lib_wis_core_framework
 COPY lib_wis_core_framework/ .
+RUN mkdir -p build
 RUN pwd; ls -al; find .
 RUN php -r "ini_set('phar.readonly',0);print(ini_get('phar.readonly'));" 
 RUN php onix_core_framework_build.php
