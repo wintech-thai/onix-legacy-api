@@ -6,6 +6,8 @@
     IBSVer : 1.0 
 */
 
+printf("DEBUG --> onix_core_dispatcher.php");
+
 declare(strict_types=1);
 
 $startE2ETime = round(microtime(true) * 1000);
@@ -47,9 +49,6 @@ $_ENV['CALLER_MODE'] = $mode;
 
 try 
 {
-    CLog::Open($param, $table);   
-    CLog::WriteLn('Start processing command');
-
     list($param, $table) = CUtils::ProcessRequest($xml);    
     $_ENV['ONIX_CALLER_VERSION'] = $param->GetFieldValue('WisWsClientAPI_VERSION');
 
@@ -57,6 +56,9 @@ try
     {
         CLog::WriteLn($xml);
     }
+
+    CLog::Open($param, $table);   
+    CLog::WriteLn('Start processing command');
 
     list($dsn, $dbuser, $dbpass) = getDBConfig();
 
