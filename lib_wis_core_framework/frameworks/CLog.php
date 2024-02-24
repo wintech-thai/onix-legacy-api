@@ -27,7 +27,7 @@ class CLog
         }
 
         $dtm = date('Y-m-d_H:i:s');
-        fprintf(self::$fh, "$dtm : %s\n", $msg);
+        printf("$dtm : %s\n", $msg);
     }    
 
     public static function WriteLnMt($funcName, $msg)
@@ -38,7 +38,7 @@ class CLog
         }
 
         $dtm = date('Y-m-d_H:i:s');
-        fprintf(self::$fh, "$dtm : $funcName : %s\n", $msg);
+        printf("$dtm : $funcName : %s\n", $msg);
     }  
 
     public static function Close()
