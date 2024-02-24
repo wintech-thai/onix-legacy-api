@@ -6,9 +6,8 @@
     IBSVer : 1.0 
 */
 
-printf("DEBUG --> onix_core_dispatcher.php");
-
 declare(strict_types=1);
+printf("DEBUG --> onix_core_dispatcher.php");
 
 $startE2ETime = round(microtime(true) * 1000);
 
