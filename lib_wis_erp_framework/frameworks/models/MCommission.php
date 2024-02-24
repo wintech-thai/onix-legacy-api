@@ -1,0 +1,148 @@
+<?php
+/*
+Purpose : Model for Commission
+Created By : Supakit Tanyung
+Created Date : 10/19/2017 (MM/DD/YYYY)
+IBSVer : 1.0
+*/
+
+declare(strict_types=1);
+
+require_once "phar://onix_erp_framework.phar/onix_erp_include.php";
+
+class MCommission extends MBaseModel
+{
+    private $cols = array(
+
+        [ # 0 For insert, update
+            'COMMISSION_ID:SPK:COMMISSION_ID:Y',
+            'COMMISSION_BATCH_ID:REFID:COMMISSION_BATCH_ID:Y',
+            'EMPLOYEE_ID:REFID:EMPLOYEE_ID:Y',
+            'ACCOUNT_DOC_ID:REFID:ACCOUNT_DOC_ID:Y',
+            'COMMISSION_AMT:N:COMMISSION_AMT:N',
+
+            'CREATE_DATE:CD:CREATE_DATE:N',
+            'MODIFY_DATE:MD:MODIFY_DATE:N',
+        ],
+        [ # 1 Delete by parent
+            'COMMISSION_BATCH_ID:SPK:COMMISSION_BATCH_ID:Y',
+        ],
+        [
+            'CM.COMMISSION_ID:SPK:COMMISSION_ID:Y',
+            'CM.COMMISSION_BATCH_ID:REFID:COMMISSION_BATCH_ID:Y',
+            'CM.EMPLOYEE_ID:REFID:EMPLOYEE_ID:Y',
+            'CM.ACCOUNT_DOC_ID:REFID:ACCOUNT_DOC_ID:Y',
+            'CM.COMMISSION_AMT:N:COMMISSION_AMT:N',
+
+            'CB.DOCUMENT_NO:S:COMMISSION_BATCH_NO:Y',
+            'CB.RUN_DATE:S:COMMISSION_BATCH_RUN_DATE:N',
+            'CB.DUE_DATE:S:COMMISSION_BATCH_DUE_DATE:N',
+            'CB.CYCLE_ID:REFID:CYCLE_ID:N',
+            'CB.BATCH_DESC:S:BATCH_DESC:Y',
+            'CB.BATCH_STATUS:N:BATCH_STATUS:Y',
+            'CB.APPROVED_DATE:S:APPROVED_DATE:N',
+            'CB.APPROVED_SEQ:NZ:APPROVED_SEQ:N',
+
+            'CC.CYCLE_CODE:S:CYCLE_CODE:Y',
+            'CC.DESCRIPTION:S:DESCRIPTION:Y',
+            'CC.CYCLE_TYPE:NZ:CYCLE_TYPE:Y',
+            'CC.DAY_OF_MONTH:NZ:DAY_OF_MONTH:Y',
+            'CC.DAY_OF_WEEK:NZ:DAY_OF_WEEK:Y',
+
+            // 'AD.DOCUMENT_DATE:S:DOCUMENT_DATE:N',
+            // 'AD.DUE_DATE:S:ACCOUNT_DOC_DUE_DATE:N',
+            // 'AD.DOCUMENT_NO:S:ACCOUNT_DOC_NO:Y',
+            // 'AD.DOCUMENT_DESC:S:ACCOUNT_DOC_DESC:Y',
+            // 'AD.ACCOUNT_SIDE:NZ:ACCOUNT_SIDE:Y',
+            // 'AD.DOCUMENT_TYPE:NZ:ACCOUNT_DOC_TYPE:Y',
+            // 'AD.DOCUMENT_STATUS:NZ:ACCOUNT_DOC_STATUS:Y',
+            // 'AD.FINAL_DISCOUNT_AMT:NZ:FINAL_DISCOUNT_AMT:N',
+            // 'AD.ITEM_DISCOUNT_AMT:NZ:ITEM_DISCOUNT_AMT:N',
+            // 'AD.VAT_PCT:NZ:VAT_PCT:N',
+            // 'AD.VAT_AMT:NZ:VAT_AMT:N',
+            // 'AD.WH_TAX_AMT:NZ:WH_TAX_AMT:N',
+            // 'AD.WH_TAX_PCT:NZ:WH_TAX_PCT:N',
+            // 'AD.PAYMENT_TYPE:NZ:PAYMENT_TYPE:Y',
+            // 'AD.INVENTORY_DOC_ID:REFID:INVENTORY_DOC_ID:Y',
+            // 'AD.CASH_DOC_ID:REFID:CASH_DOC_ID:Y',
+            // 'AD.AR_TX_TYPE:S:AR_TX_TYPE:Y',
+            // 'AD.AR_TX_AMOUNT:NZ:AR_TX_AMOUNT:N',
+            // 'AD.AR_BEGIN_AMOUNT:NZ:AR_BEGIN_AMOUNT:N',
+            // 'AD.AR_END_AMOUNT:NZ:AR_END_AMOUNT:N',
+            // 'AD.CASH_ACCOUNT_ID:REFID:CASH_ACCOUNT_ID:Y',
+            // 'AD.BILL_SIMULATE_ID:REFID:BILL_SIMULATE_ID:N',
+            // 'AD.PROMOTION_TOTAL_AMOUNT:NZ:PROMOTION_TOTAL_AMOUNT:N',
+            // 'AD.PROMOTION_AMOUNT:NZ:PROMOTION_AMOUNT:N',
+            // 'AD.PROMOTION_FINAL_DISCOUNT_AMOUNT:NZ:PROMOTION_FINAL_DISCOUNT_AMOUNT:N',
+            // 'AD.PROMO_FREE_COUNT:NZ:PROMO_FREE_COUNT:N',
+            // 'AD.PROMO_VOUCHER_COUNT:NZ:PROMO_VOUCHER_COUNT:N',
+            // 'AD.PROMO_POSTFREE_COUNT:NZ:PROMO_POSTFREE_COUNT:N',
+            // 'AD.REVENUE_EXPENSE_AMT:NZ:REVENUE_EXPENSE_AMT:N',
+            // 'AD.AR_AP_AMT:NZ:AR_AP_AMT:N',
+            // 'AD.VAT_TYPE:NZ:VAT_TYPE:N',
+            // 'AD.ALLOW_AR_AP_NEGATIVE:S:ALLOW_AR_AP_NEGATIVE:Y',
+            // 'AD.ALLOW_CASH_NEGATIVE:S:ALLOW_CASH_NEGATIVE:Y',
+            // 'AD.ALLOW_INVENTORY_NEGATIVE:S:ALLOW_INVENTORY_NEGATIVE:Y',
+            // 'AD.APPROVED_DATE:S:APPROVED_DATE:N',
+            // 'AD.APPROVED_SEQ:NZ:APPROVED_SEQ:N',
+            // 'AD.PRICING_AMT:NZ:PRICING_AMT:N',
+            // 'AD.CASH_ACTUAL_RECEIPT_AMT:NZ:CASH_ACTUAL_RECEIPT_AMT:N',
+            // 'AD.CASH_RECEIPT_AMT:NZ:CASH_RECEIPT_AMT:N',
+            // 'AD.PRIMARY_REVENUE_EXPENSE_AMT:NZ:PRIMARY_REVENUE_EXPENSE_AMT:N',
+            // 'AD.PRIMARY_ITEM_DISCOUNT_AMT:NZ:PRIMARY_ITEM_DISCOUNT_AMT:N',
+            // 'AD.PRIMARY_FINAL_DISCOUNT_AVG_AMT:NZ:PRIMARY_FINAL_DISCOUNT_AVG_AMT:N',
+            // 'AD.RECEIPT_FLAG:S:RECEIPT_FLAG:Y',
+
+            'EM.EMPLOYEE_CODE:S:EMPLOYEE_CODE:Y',
+            'EM.EMPLOYEE_NAME:S:EMPLOYEE_NAME:Y',
+            'EM.ADDRESS:S:ADDRESS:N',
+            'EM.EMAIL:S:EMAIL:N',
+            'EM.WEBSITE:S:WEBSITE:N',
+            'EM.PHONE:S:PHONE:N',
+            'EM.FAX:S:FAX:N',
+            'EM.EMPLOYEE_TYPE:REFID:EMPLOYEE_TYPE:Y',
+            'EM.EMPLOYEE_GROUP:REFID:EMPLOYEE_GROUP:Y',
+            'EM.BRANCH_ID:REFID:BRANCH_ID:Y',
+            'EM.CATEGORY:N:CATEGORY:Y',
+            'EM.NOTE:S:NOTE:N',
+            'EM.SALESMAN_SPECIFIC_FLAG:S:SALESMAN_SPECIFIC_FLAG:Y',
+
+            'MR1.DESCRIPTION:S:EMPLOYEE_TYPE_NAME:N',
+            'MR2.DESCRIPTION:S:EMPLOYEE_GROUP_NAME:N',
+            'MR3.DESCRIPTION:S:BRANCH_NAME:N',
+
+            'CB.RUN_DATE:FD:FROM_COMMISSION_BATCH_RUN_DATE:Y',
+            'CB.RUN_DATE:TD:TO_COMMISSION_BATCH_RUN_DATE:Y',
+            'CB.DUE_DATE:FD:FROM_COMMISSION_BATCH_DUE_DATE:Y',
+            'CB.DUE_DATE:TD:TO_COMMISSION_BATCH_DUE_DATE:Y',
+        ]
+    );
+
+    private $froms = array(
+
+        'FROM COMMISSION ',
+        'FROM COMMISSION ',
+        'FROM COMMISSION CM '.
+            'LEFT OUTER JOIN COMMISSION_BATCH CB ON (CB.COMMISSION_BATCH_ID = CM.COMMISSION_BATCH_ID) '.
+            'LEFT OUTER JOIN CYCLE CC ON (CB.CYCLE_ID = CC.CYCLE_ID) '.
+            'LEFT OUTER JOIN EMPLOYEE EM ON (EM.EMPLOYEE_ID = CM.EMPLOYEE_ID) '.
+            // 'LEFT OUTER JOIN ACCOUNT_DOC AD ON (AD.ACCOUNT_DOC_ID = CM.ACCOUNT_DOC_ID) '.
+            'LEFT OUTER JOIN MASTER_REF MR1 ON (EM.EMPLOYEE_TYPE = MR1.MASTER_ID) ' .
+            'LEFT OUTER JOIN MASTER_REF MR2 ON (EM.EMPLOYEE_GROUP = MR2.MASTER_ID) '.
+            'LEFT OUTER JOIN MASTER_REF MR3 ON (EM.BRANCH_ID = MR3.MASTER_ID) ',
+    );
+
+    private $orderby = array(
+
+        'ORDER BY COMMISSION_ID DESC ',
+        'ORDER BY COMMISSION_ID DESC ',
+        'ORDER BY COMMISSION_ID DESC ',
+
+    );
+
+    function __construct($db)
+    {
+        parent::__construct($db, 'COMMISSION', 'COMMISSION_ID', $this->cols, $this->froms, $this->orderby);
+    }
+}
+?>

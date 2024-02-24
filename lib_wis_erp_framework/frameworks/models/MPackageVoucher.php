@@ -1,0 +1,109 @@
+<?php
+/* 
+    Purpose : Model for Package Period
+    Created By : Seubpong Monsar
+    Created Date : 09/07/2017 (MM/DD/YYYY)
+    IBSVer : 1.0 
+*/
+
+declare(strict_types=1);
+
+require_once "phar://onix_erp_framework.phar/onix_erp_include.php";
+
+class MPackageVoucher extends MBaseModel
+{
+    private $cols = array(
+        [ # 0 For Insert, Update, Delete
+        'PACKAGE_VOUCHER_ID:SPK:PACKAGE_VOUCHER_ID:Y',
+        'PACKAGE_ID:REFID:PACKAGE_ID:N',
+        'SERVICE_ID:REFID:SERVICE_ID:N',
+        'ITEM_ID:REFID:ITEM_ID:N',
+        'ITEM_CATEGORY:REFID:ITEM_CATEGORY:N',
+        'ENABLE_FLAG:S:ENABLE_FLAG:N',
+        'QUANTITY:NZ:QUANTITY:N',
+        'SELECTION_TYPE:N:SELECTION_TYPE:N',
+        'QUANTITY_TYPE:N:QUANTITY_TYPE:N',
+        'VOUCHER_TEMPLATE_ID:REFID:VOUCHER_TEMPLATE_ID:N',
+        'FREE_TEXT:S:FREE_TEXT:N',
+
+        'CREATE_DATE:CD:CREATE_DATE:N',
+        'MODIFY_DATE:MD:MODIFY_DATE:N'
+    ],
+    [ # 1 For delete by parent
+        'PACKAGE_ID:SPK:PACKAGE_ID:Y'
+    ],
+    [ # 2 For select items by parent
+        'PV.PACKAGE_VOUCHER_ID:SPK:PACKAGE_VOUCHER_ID:N',
+        'PV.PACKAGE_ID:REFID:PACKAGE_ID:Y',
+
+        'PV.SERVICE_ID:REFID:SERVICE_ID:N',
+        'SV.SERVICE_CODE:S:SERVICE_CODE:N',
+        'SV.SERVICE_NAME:S:SERVICE_NAME:N',
+        'PV.FREE_TEXT:S:FREE_TEXT:N',
+
+        'PV.ITEM_ID:REFID:ITEM_ID:N',
+        'IT.ITEM_CODE:S:ITEM_CODE:N',
+        'IT.ITEM_NAME_THAI:S:ITEM_NAME_THAI:N',
+
+        'PV.ITEM_CATEGORY:REFID:ITEM_CATEGORY:N',
+        'CT.CATEGORY_NAME:S:CATEGORY_NAME:N',
+
+        'PV.ENABLE_FLAG:S:ENABLE_FLAG:N',
+        'PV.QUANTITY:NZ:QUANTITY:N',
+        'PV.SELECTION_TYPE:N:SELECTION_TYPE:N',
+        'PV.QUANTITY_TYPE:NZ:QUANTITY_TYPE:N',
+
+        'VT.VOUCHER_TEMPLATE_ID:REFID:VOUCHER_TEMPLATE_ID:N',
+        'VT.VC_TEMPLATE_NO:S:VC_TEMPLATE_NO:N',
+        'VT.VC_TEMPLATE_NNAME:S:VC_TEMPLATE_NNAME:N',
+        'VT.ENABLE_FLAG:S:VC_TEMPLATE_ENABLE_FLAG:N',
+        'VT.AMOUNT:N:VC_TEMPLATE_AMOUNT:N',
+        'VT.QUANTITY:N:VC_TEMPLATE_QUANTITY:N',
+        'VT.EFFECTIVE_DATE:S:VC_TEMPLATE_EFFECTIVE_DATE:N',
+        'VT.EXPIRE_DATE:S:VC_TEMPLATE_EXPIRE_DATE:N'
+    ],
+    [ # 3 For For Get Company Package All
+        'PACKAGE_VOUCHER_ID:SPK:PACKAGE_VOUCHER_ID:Y',
+        'PACKAGE_ID:REFID:PACKAGE_ID:N',
+        'SERVICE_ID:REFID:SERVICE_ID:N',
+        'ITEM_ID:REFID:ITEM_ID:N',
+        'ITEM_CATEGORY:REFID:ITEM_CATEGORY:N',
+        'ENABLE_FLAG:S:ENABLE_FLAG:N',
+        'QUANTITY:N:QUANTITY:N',
+        'SELECTION_TYPE:N:SELECTION_TYPE:N',
+        'QUANTITY_TYPE:N:QUANTITY_TYPE:N',
+        'VOUCHER_TEMPLATE_ID:REFID:VOUCHER_TEMPLATE_ID:N',
+        'FREE_TEXT:S:FREE_TEXT:N',
+
+        'CREATE_DATE:CD:CREATE_DATE:N',
+        'MODIFY_DATE:MD:MODIFY_DATE:N',
+
+        'PACKAGE_ID:INC_SET:PACKAGE_ID_SET:Y'
+    ]
+);
+
+    private $froms = array(
+        'FROM PACKAGE_VOUCHER ',
+        'FROM PACKAGE_VOUCHER ',
+        'FROM PACKAGE_VOUCHER PV '.
+            'LEFT OUTER JOIN SERVICE SV ON (PV.SERVICE_ID = SV.SERVICE_ID) '.
+            'LEFT OUTER JOIN ITEM IT ON (PV.ITEM_ID = IT.ITEM_ID) '.
+            'LEFT OUTER JOIN VOUCHER_TEMPLATE VT ON (PV.VOUCHER_TEMPLATE_ID = VT.VOUCHER_TEMPLATE_ID) '.
+            'LEFT OUTER JOIN ITEM_CATEGORY CT ON (PV.ITEM_CATEGORY = CT.ITEM_CATEGORY_ID) ',
+        'FROM PACKAGE_VOUCHER '
+    );
+
+    private $orderby = array(
+        'ORDER BY PACKAGE_VOUCHER_ID ASC ',
+        'ORDER BY PACKAGE_VOUCHER_ID ASC ',
+        'ORDER BY PV.PACKAGE_VOUCHER_ID ASC ',
+        'ORDER BY PACKAGE_VOUCHER_ID ASC '
+    );
+
+    function __construct($db) 
+    {
+        parent::__construct($db, 'PACKAGE_VOUCHER', 'PACKAGE_VOUCHER_ID', $this->cols, $this->froms, $this->orderby);
+    }
+}
+
+?>
