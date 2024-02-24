@@ -47,11 +47,11 @@ $_ENV['CALLER_MODE'] = $mode;
 
 try 
 {
-    list($param, $table) = CUtils::ProcessRequest($xml);    
-    $_ENV['ONIX_CALLER_VERSION'] = $param->GetFieldValue('WisWsClientAPI_VERSION');
-
     CLog::Open($param, $table);   
     CLog::WriteLn('Start processing command');
+
+    list($param, $table) = CUtils::ProcessRequest($xml);    
+    $_ENV['ONIX_CALLER_VERSION'] = $param->GetFieldValue('WisWsClientAPI_VERSION');
 
     if ($_ENV['INPUT_XML_DUMP'])
     {
