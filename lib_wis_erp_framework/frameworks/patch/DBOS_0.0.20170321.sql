@@ -1,0 +1,17 @@
+/*
+#IBSRevision : 0.0 (03/21/2017)
+#AUTHOR  : Seubpong Monsar
+#PURPOSE : SQL script
+*/
+
+CREATE TABLE PATCH_HISTORY
+(
+    PATCH_ID             INTEGER NOT NULL,
+    PATCH_DATE           CHAR(19) NOT NULL,
+    VERSION              TEXT NOT NULL,
+    LAST_PATCH_POINT     INTEGER,
+    PATCH_FILE           TEXT NOT NULL,
+    
+    CREATE_DATE CHAR(19) NOT NULL,
+    MODIFY_DATE CHAR(19) NOT NULL    
+);
