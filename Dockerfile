@@ -54,3 +54,5 @@ RUN ls -al /wis/system/bin
 
 COPY alias.conf /tmp
 RUN cat /tmp/alias.conf >> /etc/apache2/apache2.conf
+
+ENV WIS_CORE_ENCRYPTED=false
