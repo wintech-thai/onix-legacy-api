@@ -7,7 +7,7 @@
 */
 
 declare(strict_types=1);
-printf("DEBUG --> onix_core_dispatcher.php\n");
+error_log("DEBUG --> onix_core_dispatcher.php\n");
 
 $startE2ETime = round(microtime(true) * 1000);
 
@@ -42,11 +42,12 @@ $isEncrypted = isCGIEncryptedMode();
 $wisCoreEnrypted = $_ENV['WIS_CORE_ENCRYPTED'];
 error_log("DEBUG-1 [$isEncrypted] [$wisCoreEnrypted]");
 
-    if (isCGIEncryptedMode())
-    {
-error_log("DEBUG-2");
-        $xml = CUtils::Decrypt($xml); 
-    }
+    # No longer need the encrypt/decrypt logic
+    #if (isCGIEncryptedMode())
+    #{
+#error_log("DEBUG-2");
+    #    $xml = CUtils::Decrypt($xml); 
+    #}
 error_log("DEBUG-3");
 }
 
@@ -104,11 +105,12 @@ $plainTextResult = $result;
 
 if (($mode != 'CMDLINE') && ($mode != 'STDIN'))
 {
-    if (isCGIEncryptedMode())
-    {
-        //Encrypt data back
-        $result = CUtils::Encrypt($result);   
-    }
+    # No longer need the encrypt/decrypt logic
+    #if (isCGIEncryptedMode())
+    #{
+    #    //Encrypt data back
+    #    $result = CUtils::Encrypt($result);   
+    #}
 
     header('Content-Type: text/html');
     flush();
