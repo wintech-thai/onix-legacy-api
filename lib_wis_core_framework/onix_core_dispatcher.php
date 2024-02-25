@@ -22,6 +22,7 @@ $_ENV['WIP_DIR'] = getenv('ONIX_WIP_DIR');
 $_ENV['STAGE'] = getenv('ONIX_STAGE');
 $_ENV['LOCK_DIR'] = getenv('ONIX_LOCK_DIR');
 $_ENV['STORAGE_DIR'] = getenv('ONIX_STORAGE_DIR');
+$_ENV['WIS_CORE_ENCRYPTED'] = getenv('WIS_CORE_ENCRYPTED');
 
 $xml = '';
 if (array_key_exists($post_param_name, $_POST))
@@ -38,7 +39,8 @@ if ($xml != '')
     $_ENV['SYMKEY'] = getenv('ONIX_SYM_KEY');
 
 $isEncrypted = isCGIEncryptedMode();
-error_log("DEBUG-1 [$isEncrypted]");
+$wisCoreEnrypted = $_ENV['WIS_CORE_ENCRYPTED'];
+error_log("DEBUG-1 [$isEncrypted] [$wisCoreEnrypted]");
 
     if (isCGIEncryptedMode())
     {
