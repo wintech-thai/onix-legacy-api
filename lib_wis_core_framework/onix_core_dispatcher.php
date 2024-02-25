@@ -33,7 +33,6 @@ if (array_key_exists($post_param_name, $_POST))
 $config_file = "";
 $mode = "CGI";
 
-error_log("DEBUG-0");
 if ($xml != '')
 {
     $_ENV['SYMKEY'] = getenv('ONIX_SYM_KEY');
@@ -48,10 +47,7 @@ error_log("DEBUG-1 [$isEncrypted] [$wisCoreEnrypted]");
 #error_log("DEBUG-2");
     #    $xml = CUtils::Decrypt($xml); 
     #}
-error_log("DEBUG-3");
 }
-
-error_log("DEBUG-4");
 
 $result = "";
 $conn = NULL;

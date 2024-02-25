@@ -37,6 +37,7 @@ RUN mkdir -p /wis/system/bin
 RUN mkdir -p /wis/windows
 RUN chown apache2:apache2 /wis/system /wis/system/bin /wis/windows
 RUN mkdir -p /wis/data/sessions /wis/data/wip /wis/data/locked /wis/data/storage
+RUN chown apache2:apache2 /wis/data/sessions /wis/data/wip /wis/data/locked /wis/data/storage
 
 WORKDIR /build/lib_wis_core_framework
 COPY lib_wis_core_framework/ .

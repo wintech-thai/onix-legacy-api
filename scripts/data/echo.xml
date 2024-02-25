@@ -2,7 +2,7 @@
 <API>
   <OBJECT name="PARAM">
     <FIELD name="FUNCTION_NAME">Echo</FIELD>
-    <FIELD name="SESSION">
+    <FIELD name="SESSION"/>
   </OBJECT>
   <OBJECT name="">
     <FIELD name="ECHO_MESSAGE">HELLO WORLD</FIELD>
