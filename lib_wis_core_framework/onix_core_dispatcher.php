@@ -49,8 +49,9 @@ try
         CLog::WriteLn($xml);
     }
 
-    $funcName = $param->getFieldValue("FUNCTION_NAME");
-    CLog::WriteLn("Start processing function [$funcName]");
+    $_ENV['EXECUTE_FUNCTION_NAME'] = $param->getFieldValue("FUNCTION_NAME");
+    $funcName = $_ENV['EXECUTE_FUNCTION_NAME'];
+    CLog::WriteLn("[$funcName] Start processing function");
 
     list($dsn, $dbuser, $dbpass) = getDBConfig();
 
@@ -101,15 +102,10 @@ $endE2ETime = round(microtime(true) * 1000);
 $duration = $endE2ETime - $startE2ETime;
 $e2eDuration = sprintf('%d millisecond', $duration);
 
-if (isManagerLogEnabled())
-{
-    $_ENV['PROCESSING_DURATION'] = "$duration"; //Must be string;
-    $_ENV['SEND_OUT_COMPRESSED_SIZE'] = sprintf("%s", strlen($result));
-    CUtils::NotifyManager($xml, $plainTextResult);
-}
+$funcName = $_ENV['EXECUTE_FUNCTION_NAME'];
 
-CLog::WriteLn("Time to execute E2E : [$e2eDuration]");
-CLog::WriteLn('Done processing command');
+CLog::WriteLn("[$funcName] Time to execute E2E : [$e2eDuration]");
+CLog::WriteLn("[$funcName] Done processing command");
 CLog::Close(); 
 
 print("$result");
