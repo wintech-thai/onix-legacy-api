@@ -32,12 +32,14 @@ if (array_key_exists($post_param_name, $_POST))
 $config_file = "";
 $mode = "CGI";
 
-printf("DEBUG-0\n");
 error_log("DEBUG-0");
 if ($xml != '')
 {
     $_ENV['SYMKEY'] = getenv('ONIX_SYM_KEY');
-error_log("DEBUG-1");
+
+$isEncrypted = isCGIEncryptedMode();
+error_log("DEBUG-1 [$isEncrypted] [$_ENV['WIS_CORE_ENCRYPTED']]");
+
     if (isCGIEncryptedMode())
     {
 error_log("DEBUG-2");
@@ -46,7 +48,6 @@ error_log("DEBUG-2");
 error_log("DEBUG-3");
 }
 
-printf("DEBUG-4\n");
 error_log("DEBUG-4");
 
 $result = "";
@@ -55,7 +56,7 @@ $_ENV['CALLER_MODE'] = $mode;
 
 try 
 {
-printf("DEBUG-A --> [$post_param_name] \n$xml\n");
+error_log("DEBUG-A --> [$post_param_name] \n$xml\n");
     list($param, $table) = CUtils::ProcessRequest($xml);    
     $_ENV['ONIX_CALLER_VERSION'] = $param->GetFieldValue('WisWsClientAPI_VERSION');
 
