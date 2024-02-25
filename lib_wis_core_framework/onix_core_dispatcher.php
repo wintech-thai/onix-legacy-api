@@ -38,7 +38,7 @@ if ($xml != '')
     $_ENV['SYMKEY'] = getenv('ONIX_SYM_KEY');
 
 $isEncrypted = isCGIEncryptedMode();
-error_log("DEBUG-1 [$isEncrypted] [$_ENV['WIS_CORE_ENCRYPTED']]");
+error_log("DEBUG-1 [$isEncrypted]");
 
     if (isCGIEncryptedMode())
     {
