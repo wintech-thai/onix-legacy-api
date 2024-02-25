@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<API>
+    <OBJECT name="PARAM">
+        <FIELD name="FUNCTION_NAME">GetCompanyProfileInfo</FIELD>
+        <FIELD name="SESSION">Xbc052b0d939c6c16475a1e3594b3f732X</FIELD>
+        <FIELD name="LOGIN_ID"/>
+        <FIELD name="DEBUG_FLAG">N</FIELD>
+        <FIELD name="WisWsClientAPI_VERSION">1.0.5</FIELD>
+        <FIELD name="SCREEN_ID">Onix.ClientCenter.WinLogin</FIELD>
+    </OBJECT>
+    <OBJECT name="">
+    </OBJECT>
+</API>
