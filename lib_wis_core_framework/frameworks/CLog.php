@@ -21,10 +21,10 @@ class CLog
 
     public static function WriteLn($msg)
     {
-        if (!isset(self::$fh))
-        {
-            return;
-        }
+        #if (!isset(self::$fh))
+        #{
+        #    return;
+        #}
 
         $dtm = date('Y-m-d_H:i:s');
         #printf("$dtm : %s\n", $msg);
@@ -33,10 +33,10 @@ class CLog
 
     public static function WriteLnMt($funcName, $msg)
     {
-        if (!isset(self::$fh))
-        {
-            return;
-        }
+        #if (!isset(self::$fh))
+        #{
+        #    return;
+        #}
 
         $dtm = date('Y-m-d_H:i:s');
         #printf("$dtm : $funcName : %s\n", $msg);
