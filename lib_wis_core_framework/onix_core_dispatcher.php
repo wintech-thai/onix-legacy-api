@@ -7,7 +7,7 @@
 */
 
 declare(strict_types=1);
-printf("DEBUG --> onix_core_dispatcher.php");
+printf("DEBUG --> onix_core_dispatcher.php\n");
 
 $startE2ETime = round(microtime(true) * 1000);
 
@@ -48,6 +48,7 @@ $_ENV['CALLER_MODE'] = $mode;
 
 try 
 {
+printf("DEBUG2 --> [$post_param_name ] \n$xml\n");
     list($param, $table) = CUtils::ProcessRequest($xml);    
     $_ENV['ONIX_CALLER_VERSION'] = $param->GetFieldValue('WisWsClientAPI_VERSION');
 
