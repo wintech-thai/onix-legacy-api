@@ -7,7 +7,7 @@
 */
 
 declare(strict_types=1);
-error_log("DEBUG --> onix_core_dispatcher.php\n");
+#error_log("DEBUG --> onix_core_dispatcher.php\n");
 
 $startE2ETime = round(microtime(true) * 1000);
 
@@ -49,8 +49,8 @@ try
         CLog::WriteLn($xml);
     }
 
-    CLog::Open($param, $table);   
-    CLog::WriteLn('Start processing command');
+    $funcName = $param->getFieldValue("FUNCTION_NAME");
+    CLog::WriteLn("Start processing function [$funcName]");
 
     list($dsn, $dbuser, $dbpass) = getDBConfig();
 
