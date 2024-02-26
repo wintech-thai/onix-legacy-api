@@ -10,11 +10,9 @@ PURPOSE : Perl script to show file content
 declare(strict_types=1);
 require_once "phar://onix_core_framework.phar/onix_core_include.php";
 
-$binDir = $_ENV['BIN_DIR'];
-
-$wipDir = "$binDir/../../wip";
-$docDir = "$binDir/../../storage";
-$sessionDir = "$binDir/../../session";
+$wipDir = getenv('ONIX_WIP_DIR');
+$docDir = getenv('ONIX_STORAGE_DIR');
+$sessionDir = getenv('ONIX_SESSION_DIR');
 
 //Later used by CUtils API
 $_ENV['SESSION_DIR'] = $sessionDir;
