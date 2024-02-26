@@ -37,6 +37,8 @@ $result = "";
 $conn = NULL;
 $_ENV['CALLER_MODE'] = $mode;
 
+$commandStatus = "SUCCESS";
+
 try 
 {
     #error_log("DEBUG-A --> [$post_param_name] \n$xml\n");
@@ -78,9 +80,10 @@ catch (Exception $e)
     $param = new CTable("PARAM");
     $param->setFieldValue("ERROR_CODE", 1);
     $param->setFieldValue("ERROR_DESC", $e->getMessage());
+    $commandStatus = $e->getMessage();
 
     $table = new CTable("EXCEPTION"); 
-    $result = CUtils::CreateResultXML($param, $table);  
+    $result = CUtils::CreateResultXML($param, $table);
 }
 
 $plainTextResult = $result;
@@ -105,7 +108,7 @@ $e2eDuration = sprintf('%d millisecond', $duration);
 $funcName = $_ENV['EXECUTE_FUNCTION_NAME'];
 
 CLog::WriteLn("[$funcName] Time to execute E2E : [$e2eDuration]");
-CLog::WriteLn("[$funcName] Done processing command");
+CLog::WriteLn("[$funcName] Done processing command with status [$commandStatus]");
 CLog::Close(); 
 
 print("$result");
