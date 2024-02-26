@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<API>
+  <OBJECT name="PARAM">
+    <FIELD name="FUNCTION_NAME">Echo</FIELD>
+    <FIELD name="SESSION"/>
+  </OBJECT>
+  <OBJECT name="">
+    <FIELD name="ECHO_MESSAGE">HELLO WORLD</FIELD>
+  </OBJECT>
+</API>

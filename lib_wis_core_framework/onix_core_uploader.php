@@ -9,8 +9,8 @@ PURPOSE : Perl script to upload file
 declare(strict_types=1);
 require_once "phar://onix_core_framework.phar/onix_core_include.php";
 
-$sessionDir = '../../session';
-$wipDir = '../../wip';
+$sessionDir = getenv('ONIX_SESSION_DIR');
+$wipDir = getenv('ONIX_WIP_DIR');
 $KNOWN_KEY = ['ImageUpload', 'Session', 'PublicShare', 'UserName'];
 $PROPERTIES = [];
 

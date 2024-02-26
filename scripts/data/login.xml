@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<API>
+    <OBJECT name="PARAM">
+        <FIELD name="FUNCTION_NAME">Login</FIELD>
+        <FIELD name="SESSION"/>
+        <FIELD name="LOGIN_ID"/>
+        <FIELD name="DEBUG_FLAG">N</FIELD>
+        <FIELD name="WisWsClientAPI_VERSION">1.0.5</FIELD>
+        <FIELD name="SCREEN_ID">Onix.ClientCenter.WinLogin</FIELD>
+    </OBJECT>
+    <OBJECT name="USER">
+        <FIELD name="USER_NAME">test</FIELD>
+        <FIELD name="PASSWORD">ddd</FIELD>
+    </OBJECT>
+</API>

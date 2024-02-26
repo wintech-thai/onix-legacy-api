@@ -7,6 +7,7 @@
 */
 
 declare(strict_types=1);
+#error_log("DEBUG --> onix_core_dispatcher.php\n");
 
 $startE2ETime = round(microtime(true) * 1000);
 
@@ -21,6 +22,7 @@ $_ENV['WIP_DIR'] = getenv('ONIX_WIP_DIR');
 $_ENV['STAGE'] = getenv('ONIX_STAGE');
 $_ENV['LOCK_DIR'] = getenv('ONIX_LOCK_DIR');
 $_ENV['STORAGE_DIR'] = getenv('ONIX_STORAGE_DIR');
+$_ENV['WIS_CORE_ENCRYPTED'] = getenv('WIS_CORE_ENCRYPTED');
 
 $xml = '';
 if (array_key_exists($post_param_name, $_POST))
@@ -31,32 +33,27 @@ if (array_key_exists($post_param_name, $_POST))
 $config_file = "";
 $mode = "CGI";
 
-if ($xml != '')
-{
-    $_ENV['SYMKEY'] = getenv('ONIX_SYM_KEY');
-
-    if (isCGIEncryptedMode())
-    {
-        $xml = CUtils::Decrypt($xml); 
-    }
-}
-
 $result = "";
 $conn = NULL;
 $_ENV['CALLER_MODE'] = $mode;
 
+$commandStatus = "SUCCESS";
+
 try 
 {
+    #error_log("DEBUG-A --> [$post_param_name] \n$xml\n");
+
     list($param, $table) = CUtils::ProcessRequest($xml);    
     $_ENV['ONIX_CALLER_VERSION'] = $param->GetFieldValue('WisWsClientAPI_VERSION');
-
-    CLog::Open($param, $table);   
-    CLog::WriteLn('Start processing command');
 
     if ($_ENV['INPUT_XML_DUMP'])
     {
         CLog::WriteLn($xml);
     }
+
+    $_ENV['EXECUTE_FUNCTION_NAME'] = $param->getFieldValue("FUNCTION_NAME");
+    $funcName = $_ENV['EXECUTE_FUNCTION_NAME'];
+    CLog::WriteLn("[$funcName] Start processing function");
 
     list($dsn, $dbuser, $dbpass) = getDBConfig();
 
@@ -83,20 +80,22 @@ catch (Exception $e)
     $param = new CTable("PARAM");
     $param->setFieldValue("ERROR_CODE", 1);
     $param->setFieldValue("ERROR_DESC", $e->getMessage());
+    $commandStatus = $e->getMessage();
 
     $table = new CTable("EXCEPTION"); 
-    $result = CUtils::CreateResultXML($param, $table);  
+    $result = CUtils::CreateResultXML($param, $table);
 }
 
 $plainTextResult = $result;
 
 if (($mode != 'CMDLINE') && ($mode != 'STDIN'))
 {
-    if (isCGIEncryptedMode())
-    {
-        //Encrypt data back
-        $result = CUtils::Encrypt($result);   
-    }
+    # No longer need the encrypt/decrypt logic
+    #if (isCGIEncryptedMode())
+    #{
+    #    //Encrypt data back
+    #    $result = CUtils::Encrypt($result);   
+    #}
 
     header('Content-Type: text/html');
     flush();
@@ -106,15 +105,10 @@ $endE2ETime = round(microtime(true) * 1000);
 $duration = $endE2ETime - $startE2ETime;
 $e2eDuration = sprintf('%d millisecond', $duration);
 
-if (isManagerLogEnabled())
-{
-    $_ENV['PROCESSING_DURATION'] = "$duration"; //Must be string;
-    $_ENV['SEND_OUT_COMPRESSED_SIZE'] = sprintf("%s", strlen($result));
-    CUtils::NotifyManager($xml, $plainTextResult);
-}
+$funcName = $_ENV['EXECUTE_FUNCTION_NAME'];
 
-CLog::WriteLn("Time to execute E2E : [$e2eDuration]");
-CLog::WriteLn('Done processing command');
+CLog::WriteLn("[$funcName] Time to execute E2E : [$e2eDuration]");
+CLog::WriteLn("[$funcName] Done processing command with status [$commandStatus]");
 CLog::Close(); 
 
 print("$result");

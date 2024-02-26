@@ -28,16 +28,33 @@ RUN echo ': ${PORT:=80}' >> /etc/apache2/envvars
 RUN echo 'export PORT' >> /etc/apache2/envvars
 COPY ports.conf /etc/apache2
 
+# Allow create .phar file
+RUN echo 'phar.readonly=0' >> /usr/local/etc/php/conf.d/docker-php-phar-readonly.ini
+
 #####
 
 RUN mkdir -p /wis/system/bin
 RUN mkdir -p /wis/windows
 RUN chown apache2:apache2 /wis/system /wis/system/bin /wis/windows
-#RUN chgrp apache2 /wis/system /wis/system/bin /wis/windows
+RUN mkdir -p /wis/data/sessions /wis/data/wip /wis/data/locked /wis/data/storage
+RUN chown apache2:apache2 /wis/data/sessions /wis/data/wip /wis/data/locked /wis/data/storage
 
-COPY lib_wis_core_framework/build/onix_core_framework.phar /wis/system/bin
-COPY lib_wis_erp_framework/build/onix_erp_framework.phar /wis/system/bin
+WORKDIR /build/lib_wis_core_framework
+COPY lib_wis_core_framework/ .
+RUN mkdir -p build
+RUN php onix_core_framework_build.php
+RUN cp build/onix_core_framework.phar /wis/system/bin
+
+WORKDIR /build/lib_wis_erp_framework
+COPY lib_wis_erp_framework/ .
+RUN mkdir -p build
+RUN php onix_erp_framework_build.php
+RUN cp build/onix_erp_framework.phar /wis/system/bin
+
 COPY onix_server_scripts/* /wis/system/bin/
- 
+RUN ls -al /wis/system/bin
+
 COPY alias.conf /tmp
 RUN cat /tmp/alias.conf >> /etc/apache2/apache2.conf
+
+ENV WIS_CORE_ENCRYPTED=false
