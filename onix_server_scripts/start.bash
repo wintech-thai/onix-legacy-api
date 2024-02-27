@@ -3,4 +3,5 @@
 cd /wis/system/bin
 cat patch.xml | php dispatcher.php
 
-apache2 -D FOREGROUND
+# Start apache2
+/sbin/runit-wrapper
