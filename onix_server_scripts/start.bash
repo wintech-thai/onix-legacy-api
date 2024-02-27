@@ -5,4 +5,4 @@ cat patch.xml | php dispatcher.php
 cd -
 
 # Start apache2
-docker-entrypoint apache2-foreground
+docker-php-entrypoint apache2-foreground
