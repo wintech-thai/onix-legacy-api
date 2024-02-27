@@ -1,4 +1,5 @@
 FROM php:7.2-apache
+ARG BUILD_VERSION
 
 RUN a2enmod rewrite && a2enmod ssl
 
@@ -52,7 +53,8 @@ RUN php onix_erp_framework_build.php
 RUN cp build/onix_erp_framework.phar /wis/system/bin
 
 COPY onix_server_scripts/* /wis/system/bin/
-RUN ls -al /wis/system/bin
+RUN sed -i "s#VERSION_HERE#${BUILD_VERSION}#g" /wis/system/bin/build.php
+RUN ls -al /wis/system/bin; cat /wis/system/bin/build.php
 
 COPY alias.conf /tmp
 RUN cat /tmp/alias.conf >> /etc/apache2/apache2.conf

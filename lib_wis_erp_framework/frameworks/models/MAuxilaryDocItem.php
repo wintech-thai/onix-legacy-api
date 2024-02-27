@@ -92,12 +92,29 @@ class MAuxilaryDocItem extends MBaseModel
                     'SV.PRICING_DEFINITION:S:SERVICE_PRICING_DEFINITION:N',
                     'SV.WH_GROUP:REFID:WH_GROUP:N', 
 
+                    'AD.DOCUMENT_TYPE:N:DOCUMENT_TYPE:Y',
+                    'AD.DOCUMENT_NO:S:DOCUMENT_NO:Y',
+                    'AD.DOCUMENT_DATE:S:DOCUMENT_DATE:N',
+
                     'ADR.DOCUMENT_NO:S:REF_BY_DOC_NO:N', 
+
+                    'EN.ENTITY_ID:REFID:ENTITY_ID:Y',
+                    'EN.ENTITY_CODE:S:ENTITY_CODE:Y',
+                    'EN.ENTITY_NAME:S:ENTITY_NAME:Y',
+
+                    'PJ.PROJECT_ID:REFID:PROJECT_ID:Y',
+                    'PJ.PROJECT_CODE:S:PROJECT_CODE:Y',
+                    'PJ.PROJECT_NAME:S:PROJECT_NAME:Y',
+                    'PJ.PROJECT_DESC:S:PROJECT_DESC:Y',
 
                     'UN1.DESCRIPTION:S:SERVICE_UNIT_NAME:N',
                     'UN1.DESCRIPTION_ENG:S:SERVICE_UNIT_NAME_ENG:N',
                     'UN2.DESCRIPTION:S:ITEM_UNIT_NAME:N',
-                    'UN2.DESCRIPTION_ENG:S:ITEM_UNIT_NAME_ENG:N',                    
+                    'UN2.DESCRIPTION_ENG:S:ITEM_UNIT_NAME_ENG:N',          
+                    
+                    # Always put these at the end
+                    'AD.DOCUMENT_DATE:FD:FROM_DOCUMENT_DATE:Y',
+                    'AD.DOCUMENT_DATE:TD:TO_DOCUMENT_DATE:Y',                      
                   ],
 
                   [ # 2 For Delete by parent
@@ -179,8 +196,10 @@ class MAuxilaryDocItem extends MBaseModel
 
                 'FROM AUXILARY_DOC_ITEM AI '.
                     'LEFT OUTER JOIN AUXILARY_DOC AD ON (AD.AUXILARY_DOC_ID = AI.AUXILARY_DOC_ID) '.
+                    'LEFT OUTER JOIN PROJECT PJ ON (AD.PROJECT_ID = PJ.PROJECT_ID) '.                      
                     'LEFT OUTER JOIN ACCOUNT_DOC ADR ON (AI.REF_BY_ID = ADR.ACCOUNT_DOC_ID) '.
                     'LEFT OUTER JOIN ITEM IT ON (IT.ITEM_ID = AI.ITEM_ID) '.
+                    'LEFT OUTER JOIN ENTITY EN ON (EN.ENTITY_ID = AD.ENTITY_ID) '.                    
                     'LEFT OUTER JOIN SERVICE SV ON (SV.SERVICE_ID = AI.SERVICE_ID) '.
                     'LEFT OUTER JOIN MASTER_REF UN1 ON (UN1.MASTER_ID = SV.SERVICE_UOM) '.
                     'LEFT OUTER JOIN MASTER_REF UN2 ON (UN2.MASTER_ID = IT.ITEM_UOM) ',
