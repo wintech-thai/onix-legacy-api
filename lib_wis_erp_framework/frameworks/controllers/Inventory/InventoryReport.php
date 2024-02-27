@@ -68,6 +68,63 @@ class InventoryReport extends CBaseController
         return(array($param, $p));
     }
 
+    private static function ProcessItems($rows)
+    {
+        $prevKey = "";
+        $arr = array();
+
+        foreach ($rows as $item)
+        {
+            $itemId = $item->getFieldValue('ITEM_ID');
+            $locationId = $item->getFieldValue('LOCATION_ID');
+
+            $itemCode = $item->getFieldValue('ITEM_CODE');
+            $itemName = $item->getFieldValue('ITEM_NAME_THAI');
+            $locName = $item->getFieldValue('LOCATION_NAME');
+
+            $tx = $item->getFieldValue('DIRECTION');
+            $qty = $item->getFieldValue('TX_QTY_AVG');
+            $amt = $item->getFieldValue('TX_AMT_AVG');
+
+            $beginQty = $item->getFieldValue('BEGIN_QTY_AVG');
+            $beginAmt = $item->getFieldValue('BEGIN_AMOUNT_AVG');            
+                        
+            $key = "$itemId-$locationId";
+
+            if ($key != $prevKey)
+            {
+                $prevKey = $key;
+
+                $o = new CTable('');
+                $o->setFieldValue('DIRECTION', 'B');
+                $o->setFieldValue('ITEM_CODE', $itemCode);
+                $o->setFieldValue('ITEM_NAME_THAI', $itemName);
+                $o->setFieldValue('LOCATION_NAME', $locName);
+
+                $o->setFieldValue('ITEM_ID', $itemId);
+                $o->setFieldValue('LOCATION_ID', $locationId);                   
+                $o->setFieldValue('END_QTY_AVG', $beginQty);
+                $o->setFieldValue('END_AMOUNT_AVG', $beginAmt);                
+                array_push($arr, $o);
+            }
+
+            if ($tx == 'I')
+            {
+                $item->setFieldValue('TX_QTY_AVG_IN', $qty);
+                $item->setFieldValue('TX_AMT_AVG_IN', $amt);
+            }
+            else
+            {
+                $item->setFieldValue('TX_QTY_AVG_OUT', $qty);
+                $item->setFieldValue('TX_AMT_AVG_OUT', $amt);
+            }
+
+            array_push($arr, $item);
+        }
+
+        return($arr);
+    }
+
     public static function GetInventoryItemMovementList($db, $param, $data)
     {
 //CSql::SetDumpSQL(true);        
@@ -76,9 +133,11 @@ class InventoryReport extends CBaseController
 
         self::populateArea($data);
         list($cnt, $rows) = $u->Query(1, $data);
+        $filters = self::ProcessItems($rows);
         
         $p = new CTable($u->GetTableName());
-        self::PopulateRow($p, $cnt, 1, 'INVENTORY_MOVEMENT_LIST', $rows);
+        $cnt = count($filters);
+        self::PopulateRow($p, $cnt, 1, 'INVENTORY_MOVEMENT_LIST', $filters);
         
         return(array($param, $p));
     }    

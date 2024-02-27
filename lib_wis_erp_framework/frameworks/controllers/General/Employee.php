@@ -47,7 +47,7 @@ class Employee extends CBaseController
     {
 // CSql::SetDumpSQL(true);        
         $u = self::createObject($db);
-
+        
         CHelper::OverrideOrderBy($u, 1, $data, self::$orderByConfig);                
         list($cnt, $item_cnt, $chunk_cnt, $rows) = $u->QueryChunk(1, $data);
 

@@ -210,8 +210,7 @@ $cfg_access_right =
     ['HR_PAYROLL_ADD', 'Enable/Disable adding payroll document', 'N', 'YYY'],
     ['HR_PAYROLL_DELETE', 'Enable/Disable deleting payroll document', 'N', 'YYY'],
     ['HR_PAYROLL_EDIT', 'Enable/Disable editing payroll document', 'N', 'YYY'],
-    ['HR_PAYROLL_VIEW', 'Enable/Disable viewing payroll document', 'N', 'YYY'],  
-    ['HR_PAYROLL_REPORT', 'Enable/Disable generating payroll report', 'N', 'YYY'], 
+    ['HR_PAYROLL_VIEW', 'Enable/Disable viewing payroll document', 'N', 'YYY'],
 
     ['HR_ORGCHART_ADD', 'Enable/Disable adding org chart', 'Y', 'YYY'],
     ['HR_ORGCHART_DELETE', 'Enable/Disable deleting org chart', 'Y', 'YYY'],
@@ -227,5 +226,12 @@ $cfg_access_right =
     ['HR_TAXFORM_ADD', 'Enable/Disable adding OT document', 'N', 'YYY'],
     ['HR_TAXFORM_DELETE', 'Enable/Disable deleting OT document', 'N', 'YYY'],
     ['HR_TAXFORM_EDIT', 'Enable/Disable editing OT document', 'N', 'YYY'],
-    ['HR_TAXFORM_VIEW', 'Enable/Disable viewing OT document', 'N', 'YYY'],      
+    ['HR_TAXFORM_VIEW', 'Enable/Disable viewing OT document', 'N', 'YYY'],
+
+    ['HR_PAYROLL_REPORT', 'Enable/Disable generating payroll report', 'N', 'YYY'], 
+    ['CASH_REPORT_MENU', 'Enable/Disable generating cash report', 'N', 'YYY'], 
+    ['PURCHASE_REPORT_MENU', 'Enable/Disable generating purchase report', 'N', 'YYY'], 
+    ['GENERAL_REPORT_MENU', 'Enable/Disable generating general report', 'N', 'YYY'], 
+    ['SALE_REPORT_MENU', 'Enable/Disable generating sale report', 'N', 'YYY'],
+    ['INVENTORY_REPORT_MENU', 'Enable/Disable generating inventory report', 'N', 'YYY'],    
 ];
