@@ -123,7 +123,7 @@ class HrPayrollReport extends CBaseController
                 $amt = $o->GetFieldValue($field);                
                 $emp->SetFieldValue($mm, $amt);  
                 
-                $sum = $sum + $amt;
+                $sum = $sum + floatval($amt);
             }
 
             if ($found)
