@@ -25,9 +25,16 @@ $_ENV['STORAGE_DIR'] = getenv('ONIX_STORAGE_DIR');
 $_ENV['WIS_CORE_ENCRYPTED'] = getenv('WIS_CORE_ENCRYPTED');
 
 $xml = '';
-if (array_key_exists($post_param_name, $_POST))
+if (!empty($_POST))
 {
-    $xml = $_POST[$post_param_name];
+    if (array_key_exists($post_param_name, $_POST))
+    {
+        $xml = $_POST[$post_param_name];
+    }
+}
+else
+{
+    $xml = file_get_contents("php://stdin");
 }
 
 $config_file = "";

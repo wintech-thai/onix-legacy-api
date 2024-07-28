@@ -1,0 +1,9 @@
+<API>
+  <OBJECT name="PARAM">
+    <FIELD name="FUNCTION_NAME">Patch</FIELD>
+    <FIELD name="ERROR_CODE"></FIELD>
+    <FIELD name="ERROR_DESC"></FIELD>
+  </OBJECT>
+  <OBJECT name="OBJECT">
+  </OBJECT>
+</API>

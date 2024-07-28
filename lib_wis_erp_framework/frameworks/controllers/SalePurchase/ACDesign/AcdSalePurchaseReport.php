@@ -452,7 +452,7 @@ class AcdSalePurchaseReport extends SalePurchaseReport
 
             foreach (self::$months as $m)
             {
-                $amt = $obj->getFieldValue($m);
+                $amt = floatval($obj->getFieldValue($m));
                 $totalInMonth = $totalInMonth + $amt;
 
                 $currAmt = $totObj->getFieldValue($m);                

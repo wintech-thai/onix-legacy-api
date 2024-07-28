@@ -6,6 +6,8 @@
     IBSVer : 1.0 
 */
 
+# Run "cat patch.xml | dispatch.php" to patch from command line
+
 declare(strict_types=1);
 
 require_once 'config.php';
