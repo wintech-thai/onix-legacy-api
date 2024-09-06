@@ -22,6 +22,10 @@ class InventoryItem extends CBaseController
         'item_type' => 'TYPE_NAME',
     ];
 
+    private static $fieldMapStorage = [
+        ['ITEM_IMAGE1', 'ITEM_IMAGE1_WIP', '/inventory/item'],
+    ];
+
     private static function initSqlConfig($db)
     {
         $config = array
@@ -103,9 +107,12 @@ class InventoryItem extends CBaseController
         $u = new MItem($db);
         $db->beginTransaction();
 
+        self::PreprocessStoragesH($data, 'DUMMY_ITEM_IMAGES', self::$fieldMapStorage); //Put this before CreateData
         $childs = self::initSqlConfig($db);
 
         self::CreateData($db, $data, $u, 2, $childs);
+        self::manipulateImages($db, $data, 'DUMMY_ITEM_IMAGES', 'IMAGE_NAME_WIP', 'IMAGE_NAME_DEST', 'IMAGE_NAME');
+
         self::RegisterBalanceItem($db, $data);
 
         $db->commit();
@@ -193,13 +200,17 @@ class InventoryItem extends CBaseController
         $u = new MItem($db);
         $db->beginTransaction();
 
+        self::PreprocessStoragesH($data, 'DUMMY_ITEM_IMAGES', self::$fieldMapStorage); //Put this before CreateData
+
         $childs = self::initSqlConfig($db);
         self::UpdateData($db, $data, $u, 2, $childs);
+
+        self::manipulateImages($db, $data, 'DUMMY_ITEM_IMAGES', 'IMAGE_NAME_WIP', 'IMAGE_NAME_DEST', 'IMAGE_NAME');
         self::RegisterBalanceItem($db, $data);
 
         $db->commit();
         return(array($param, $data));        
-    }      
+    }
 
     public static function DeleteInventoryItem($db, $param, $data)
     {
