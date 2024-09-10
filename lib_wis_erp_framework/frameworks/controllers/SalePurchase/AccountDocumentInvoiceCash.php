@@ -28,6 +28,8 @@ class AccountDocumentInvoiceCash extends AccountDocumentBase
 
         $param = new CTable("PARAM");
         $param->SetFieldValue('AUTO_NUMBER', 'N');  
+/*
+        //ทาง AC ไม่ต้องการให้ approve invoice แล้วไปสร้าง ใบนำเข้าคลัง, เพราะว่าจะทำใบนำเข้าคลังเองต่างหาก
 
         //== Start Inventory Doc
         $invDoc = $this->deriveInventoryDocument();
@@ -48,7 +50,8 @@ class AccountDocumentInvoiceCash extends AccountDocumentBase
 
         $errors = $doc->GetChildArray('ERROR_ITEM');
         $errCnt = count($errors);
-        
+*/
+
         if ($errCnt > 0)
         {
             return([$errCnt, $doc, null]);

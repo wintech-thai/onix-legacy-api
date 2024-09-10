@@ -28,7 +28,9 @@ class AccountDocumentInvoiceDebt extends AccountDocumentBase
 
         $param = new CTable("PARAM");
         $param->SetFieldValue('AUTO_NUMBER', 'N');  
-
+/*
+        //ทาง AC ไม่ต้องการให้ approve invoice แล้วไปสร้าง ใบนำเข้าคลัง, เพราะว่าจะทำใบนำเข้าคลังเองต่างหาก
+        
         //== Start Inventory Doc
         $invDoc = $this->deriveInventoryDocument();
         if (isset($invDoc))
@@ -54,7 +56,7 @@ class AccountDocumentInvoiceDebt extends AccountDocumentBase
             return([$errCnt, $doc, null]);
         }
         //== End Inventory Doc
-
+*/
         //== Start ar ap Doc
         $arapDoc = $this->deriveArApDocument();
 
