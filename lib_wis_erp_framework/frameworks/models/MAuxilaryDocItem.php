@@ -225,7 +225,7 @@ class MAuxilaryDocItem extends MBaseModel
                 
                 'ORDER BY AUXILARY_DOC_ITEM_ID ASC ',  
                 
-                'ORDER BY AUXILARY_DOC_ID ASC, AUXILARY_DOC_ITEM_ID ASC ',  
+                'ORDER BY AD.DOCUMENT_DATE DESC, AUXILARY_DOC_ITEM_ID ASC ',  
 
                 'ORDER BY AUXILARY_DOC_ITEM_ID ASC ',  
     );
