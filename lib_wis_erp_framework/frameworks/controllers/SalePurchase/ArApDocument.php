@@ -174,10 +174,11 @@ class ArApDocument extends CBaseController
             $db->beginTransaction();
             $tx = true;
         }
-
+CLog::WriteLn("ApproveArApDoc-1"); 
         $bal = self::deriveBalanceDoc($db, $data);
         $type = $bal->GetFieldValue('BAL_DOC_TYPE');
         $result = BalanceAPI::Apply($db, $type, $bal, $allowNegative=='Y', NULL);
+CLog::WriteLn("ApproveArApDoc-2"); 
         if (!$result)
         {
             if ($tx) $db->rollBack();
@@ -190,7 +191,9 @@ class ArApDocument extends CBaseController
         }
 
         $accumArr = $bal->GetChildArray('GLOBAL_ACCUM_LIST');
+CLog::WriteLn("ApproveArApDoc-3"); 
         self::updateArApBalance($db, $accumArr);
+CLog::WriteLn("ApproveArApDoc-4"); 
 
         if ($tx)
         {
