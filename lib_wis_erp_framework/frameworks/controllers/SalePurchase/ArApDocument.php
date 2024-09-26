@@ -153,7 +153,7 @@ class ArApDocument extends CBaseController
         foreach ($arr as $accum)
         {
             $id = $accum->GetFieldValue('BAL_OWNER_ACTUAL_ID');
-            $amt = $accum->GetFieldValue('END_QTY_AVG');
+            $amt = floatval($accum->GetFieldValue('END_QTY_AVG'));
 
             $dat->SetFieldValue('ENTITY_ID', $id);
             $dat->SetFieldValue('AR_AP_BALANCE', $amt);
