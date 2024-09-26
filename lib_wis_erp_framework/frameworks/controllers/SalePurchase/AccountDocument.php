@@ -1264,9 +1264,7 @@ class AccountDocument extends CBaseController
         else
         {
             //Already exist
-CLog::WriteLn("DEBUG1-1");  
             list($p, $d) = self::UpdateAccountDoc($db, $param, $data);
-CLog::WriteLn("DEBUG1-2");  
         }
 
         $isApprovedDocNo = $d->getFieldValue('IS_APPROVED_DOC_NO');
@@ -1290,11 +1288,10 @@ CLog::WriteLn("DEBUG1-2");
                 }
             }
         }
-CLog::WriteLn("DEBUG2-1");  
+
         $doc = self::createAccountDocObject($db, $d);
-CLog::WriteLn("DEBUG2-2");  
         list($errCnt, $cashDoc, $invDoc) = $doc->ApproveDocument();
-CLog::WriteLn("DEBUG2-3");  
+
         if ($errCnt > 0)
         {
             if ($tx)
@@ -1304,14 +1301,13 @@ CLog::WriteLn("DEBUG2-3");
 
             return([$param, $cashDoc]);
         }
-CLog::WriteLn("DEBUG3-1");  
+
         //Update value back such as begin and end balance, approve_date etc.
         $d->setFieldValue('DOCUMENT_STATUS', self::ACCOUNT_DOC_APPROVED);
         $d->setFieldValue('APPROVED_DATE', CUtils::GetCurrentDateTimeInternal());
         $d->setFieldValue('APPROVED_SEQ', CSql::GetSeq($db, 'ACCOUNT_DOC_APPROVED_SEQ', 1));
-CLog::WriteLn("DEBUG3-2");  
+
         list($p, $d) = self::UpdateAccountDoc($db, $param, $d);
-CLog::WriteLn("DEBUG3-3");  
 
         if ($tx)
         {

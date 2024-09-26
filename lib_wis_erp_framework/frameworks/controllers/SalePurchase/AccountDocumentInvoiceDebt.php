@@ -59,18 +59,15 @@ class AccountDocumentInvoiceDebt extends AccountDocumentBase
 */
         //== Start ar ap Doc
         $arapDoc = $this->deriveArApDocument();
-CLog::WriteLn("processDocument-1");  
+
         if ($mode == 1)
         {
             list($p, $d) = ArApDocument::VerifyArApDoc($db, $param, $arapDoc);
         }
         else
         {
-CLog::WriteLn("processDocument-2"); 
             list($p, $d) = ArApDocument::ApproveArApDoc($db, $param, $arapDoc);
-CLog::WriteLn("processDocument-3"); 
         }
-CLog::WriteLn("processDocument-4"); 
 
         $doc = $d;
         $cd = $d;
@@ -136,18 +133,15 @@ CLog::WriteLn("processDocument-4");
     
     public function ApproveDocument()
     {
-CLog::WriteLn("ApproveDocument-1");  
         list($errCnt, $cashDoc, $invDoc) = self::processDocument(2); 
-CLog::WriteLn("ApproveDocument-2");  
+
         if ($errCnt <= 0)
         {
-CLog::WriteLn("ApproveDocument-3"); 
             self::updateAssociateValues($cashDoc, $invDoc);
-CLog::WriteLn("ApproveDocument-4"); 
         }   
 
         return([$errCnt, $cashDoc, $invDoc]);
-    }    
+    }
 }
 
 ?>
