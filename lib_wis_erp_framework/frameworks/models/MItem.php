@@ -38,7 +38,9 @@ class MItem extends MBaseModel
                    'IT.PRICE_CATEGORY:REFID:PRICE_CATEGORY:N',
                    'IT.ITEM_LINEAR:REFID:ITEM_LINEAR:N',
                    'IT.VAT_FLAG:S:VAT_FLAG:Y', 
-                   'IT.BORROW_FLAG:S:BORROW_FLAG:Y',  
+                   'IT.BORROW_FLAG:S:BORROW_FLAG:Y',
+                   'IT.ITEM_IMAGE1:S:ITEM_IMAGE1:N',
+                   'IT.ITEM_IMAGE1:S:ITEM_IMAGE1_WIP:N', //Temp field for keeping the old value
 
                    'MR1.DESCRIPTION:S:TYPE_NAME:N', 
                    'MR2.DESCRIPTION:S:UOM_NAME:N', 
@@ -78,7 +80,8 @@ class MItem extends MBaseModel
                    'DEFAULT_SELL_PRICE:NZ:DEFAULT_SELL_PRICE:N', 
                    'PRICING_DEFINITION:S:PRICING_DEFINITION:N',                   
                    'VAT_FLAG:S:VAT_FLAG:Y', 
-                   'BORROW_FLAG:S:BORROW_FLAG:Y',  
+                   'BORROW_FLAG:S:BORROW_FLAG:Y',
+                   'ITEM_IMAGE1:S:ITEM_IMAGE1:N',
 
                    'CREATE_DATE:CD:CREATE_DATE:N',
                    'MODIFY_DATE:MD:MODIFY_DATE:N'

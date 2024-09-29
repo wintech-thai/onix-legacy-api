@@ -1291,6 +1291,7 @@ class AccountDocument extends CBaseController
 
         $doc = self::createAccountDocObject($db, $d);
         list($errCnt, $cashDoc, $invDoc) = $doc->ApproveDocument();
+
         if ($errCnt > 0)
         {
             if ($tx)
@@ -1305,6 +1306,7 @@ class AccountDocument extends CBaseController
         $d->setFieldValue('DOCUMENT_STATUS', self::ACCOUNT_DOC_APPROVED);
         $d->setFieldValue('APPROVED_DATE', CUtils::GetCurrentDateTimeInternal());
         $d->setFieldValue('APPROVED_SEQ', CSql::GetSeq($db, 'ACCOUNT_DOC_APPROVED_SEQ', 1));
+
         list($p, $d) = self::UpdateAccountDoc($db, $param, $d);
 
         if ($tx)
@@ -1314,7 +1316,6 @@ class AccountDocument extends CBaseController
 
         return(array($param, $d));
     }
-
 }
 
 ?>

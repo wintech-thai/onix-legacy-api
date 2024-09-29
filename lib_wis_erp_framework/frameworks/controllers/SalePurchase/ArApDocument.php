@@ -153,11 +153,12 @@ class ArApDocument extends CBaseController
         foreach ($arr as $accum)
         {
             $id = $accum->GetFieldValue('BAL_OWNER_ACTUAL_ID');
-            $amt = $accum->GetFieldValue('END_QTY_AVG');
-
+            $amt = floatval($accum->GetFieldValue('END_QTY_AVG'));
+//CLog::WriteLn("updateArApBalance-1 [$amt]"); 
             $dat->SetFieldValue('ENTITY_ID', $id);
             $dat->SetFieldValue('AR_AP_BALANCE', $amt);
             $ca->Update(2, $dat);
+//CLog::WriteLn("updateArApBalance-2 [$amt]"); 
         }
     }
 
@@ -174,10 +175,11 @@ class ArApDocument extends CBaseController
             $db->beginTransaction();
             $tx = true;
         }
-
+//CLog::WriteLn("ApproveArApDoc-1"); 
         $bal = self::deriveBalanceDoc($db, $data);
         $type = $bal->GetFieldValue('BAL_DOC_TYPE');
         $result = BalanceAPI::Apply($db, $type, $bal, $allowNegative=='Y', NULL);
+//CLog::WriteLn("ApproveArApDoc-2"); 
         if (!$result)
         {
             if ($tx) $db->rollBack();
@@ -190,7 +192,9 @@ class ArApDocument extends CBaseController
         }
 
         $accumArr = $bal->GetChildArray('GLOBAL_ACCUM_LIST');
+//CLog::WriteLn("ApproveArApDoc-3"); 
         self::updateArApBalance($db, $accumArr);
+//CLog::WriteLn("ApproveArApDoc-4"); 
 
         if ($tx)
         {
