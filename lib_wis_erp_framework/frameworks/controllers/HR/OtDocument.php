@@ -22,6 +22,7 @@ class OtDocument extends CBaseController
             ['OT_DOC_LIST', new MOtDocumentItem($db), 0, 0, 1], 
             ['OT_EXPENSE_LIST', new MEmployeeExpenseItem($db), 0, 0, 1], 
             ['DEDUCTION_LIST', new MPayrollDeductionItem($db), 0, 0, 1], 
+            ['ALLOWANCE_LIST', new MEmployeeAllowanceItem($db), 0, 0, 1], 
         );
 
         self::$cfg = $config;
