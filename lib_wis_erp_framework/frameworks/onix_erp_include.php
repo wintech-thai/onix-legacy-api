@@ -156,6 +156,7 @@ require_once "phar://onix_erp_framework.phar/models/MOtDocument.php";
 require_once "phar://onix_erp_framework.phar/models/MOtDocumentItem.php";
 require_once "phar://onix_erp_framework.phar/models/MEmployeeExpenseItem.php";
 require_once "phar://onix_erp_framework.phar/models/MPayrollDeductionItem.php";
+require_once "phar://onix_erp_framework.phar/models/MEmployeeAllowanceItem.php";
 require_once "phar://onix_erp_framework.phar/models/MCostDocument.php";
 require_once "phar://onix_erp_framework.phar/models/MCostDocumentItem.php";
 require_once "phar://onix_erp_framework.phar/models/MEmployeeLeaveDoc.php";
