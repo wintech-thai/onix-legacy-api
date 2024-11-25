@@ -97,7 +97,8 @@ class MPayrollDocumentItem extends MBaseModel
                     'EM.ACCOUNT_NO:S:ACCOUNT_NO:N', 
                     'EM.BANK_BRANCH_NAME:S:BANK_BRANCH_NAME:N', 
                     'EM.ID_NUMBER:S:ID_NUMBER:N', 
-
+                    'EM.HIRING_FLAG:S:HIRING_FLAG:N', 
+                    
                     'MR1.DESCRIPTION:S:NAME_PREFIX_DESC:N', 
                     'MR2.DESCRIPTION:S:BANK_NAME:N',
                     
