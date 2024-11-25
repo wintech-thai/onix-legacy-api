@@ -49,6 +49,7 @@ $cfg_access_right =
     ['HR_EMPLOYEE_DELETE', 'Enable/Disable deleting employee', 'Y', 'YYY'],
     ['HR_EMPLOYEE_EDIT', 'Enable/Disable editing employee', 'Y', 'YYY'],
     ['HR_EMPLOYEE_VIEW', 'Enable/Disable viewing employee', 'Y', 'YYY'],
+    ['HR_EMPLOYEE_SALARY', 'Enable/Disable update employee salary', 'Y', 'YYY'],
 
     ['GENERAL_CUSTOMER_ADD', 'Enable/Disable adding customer', 'Y', 'YYY'],
     ['GENERAL_CUSTOMER_DELETE', 'Enable/Disable deleting customer', 'Y', 'YYY'],

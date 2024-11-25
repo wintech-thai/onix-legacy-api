@@ -86,6 +86,7 @@ $ONIX_POST_PATCH_LIST = [
     ['UpdateAccountDocRedeemed', "phar://onix_erp_framework.phar/controllers/Patch/PostPatch.php"],
     ['UpdateAccessRight6', "phar://onix_erp_framework.phar/controllers/Patch/PostPatch.php"],
     ['UpdateAccessRight7', "phar://onix_erp_framework.phar/controllers/Patch/PostPatch.php"],
+    ['UpdateAccessRight8', "phar://onix_erp_framework.phar/controllers/Patch/PostPatch.php"],
 ];
 
 //Is being used in GetStaticPatchHistoryList()
