@@ -36,6 +36,12 @@ class PostPatch extends CBaseController
         return(true);
     }
 
+    public static function PatchUpdateAccessRight8($db)
+    { 
+        AccessRight::PopulateAccessRight($db, new CTable(''), new CTable(''));
+        return(true);        
+    }
+
     public static function PatchUpdateAccessRight7($db)
     { 
         AccessRight::PopulateAccessRight($db, new CTable(''), new CTable(''));
