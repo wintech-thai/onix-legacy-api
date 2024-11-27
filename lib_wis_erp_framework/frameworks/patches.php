@@ -39,6 +39,7 @@ $ONIX_PATCH_LIST = [
     ['1.5.18', 'ONIX_1.5.18.20241120.sql'],  
     ['1.5.19', 'ONIX_1.5.19.20241125.sql'],
     ['1.5.20', 'ONIX_1.5.20.20241125.sql'],
+    ['1.5.21', 'ONIX_1.5.21.20241126.sql'],
 ];
 
 //DO NOT use CUSTOM PATCH if possible, please use POST PATCH instead.
