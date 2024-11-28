@@ -381,6 +381,7 @@ $ONIX_SERVICES_LIST = [
     'DeletePayrollDoc' => [$bp . 'controllers/HR/PayrollDocument.php', 'DeletePayrollDoc', $userLvl],    
     'ApprovePayrollDoc' => [$bp . 'controllers/HR/PayrollDocument.php', 'ApprovePayrollDoc', $userLvl],
     'GetEmployeeAccumulate' => [$bp . 'controllers/HR/PayrollDocument.php', 'GetEmployeeAccumulate', $userLvl],
+    'GetEmployeeDeductionList' => [$bp . 'controllers/HR/PayrollDocument.php', 'GetEmployeeDeductionList', $userLvl],
 
     //OtDocument
     'GetOtDocList' => [$bp . 'controllers/HR/OtDocument.php', 'GetOtDocList', $userLvl],

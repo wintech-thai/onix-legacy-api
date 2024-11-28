@@ -78,6 +78,24 @@ class MPayrollDeductionItem extends MBaseModel
                     'PEI.DEDUCTION_DATE:FD:FROM_DEDUCTION_DATE:Y',
                     'PEI.DEDUCTION_DATE:TD:TO_DEDUCTION_DATE:Y', 
                   ],
+
+                  [ # 6
+                    'OD.EMPLOYEE_ID:REFID:EMPLOYEE_ID:Y',
+                    'OD.DOCUMENT_DATE:S:DOCUMENT_DATE:Y',
+                    'PDI.DEDUCTION_NOTE:S:DEDUCTION_NOTE:N',
+                    'PDI.DEDUCTION_AMOUNT:NZ:DEDUCTION_AMOUNT:N',
+                    'PDI.DEDUCTION_TYPE:REFID:DEDUCTION_TYPE:Y',                  
+                    'PDI.DEDUCTION_DATE:S:DEDUCTION_DATE:N',
+                    'PDI.DEDUCTION_QUANTITY:NZ:DEDUCTION_QUANTITY:N',
+                    'PDI.DEDUCTION_PRICE:NZ:DEDUCTION_PRICE:N',
+                    'PDI.DURATION:NZ:DURATION:N',
+                    'PDI.DURATION_MINUTE:NZ:DURATION_MINUTE:N',
+                    'PDI.DURATION_UNIT:S:DURATION_UNIT:N',
+                    'PDI.DURATION_HINT:S:DURATION_HINT:N',
+                    
+                    'OD.DOCUMENT_DATE:FD:FROM_DOCUMENT_DATE:Y',
+                    'OD.DOCUMENT_DATE:TD:TO_DOCUMENT_DATE:Y',     
+                  ],
     );
 
     private $froms = array(
@@ -96,7 +114,10 @@ class MPayrollDeductionItem extends MBaseModel
                   'LEFT OUTER JOIN OT_DOCUMENT OD ON (PEI.OT_DOC_ID = OD.OT_DOC_ID) ', 
                   
                 'FROM PAYROLL_DEDUCTION_ITEM PEI ' .
-                  'LEFT OUTER JOIN OT_DOCUMENT OD ON (PEI.OT_DOC_ID = OD.OT_DOC_ID) ',                    
+                  'LEFT OUTER JOIN OT_DOCUMENT OD ON (PEI.OT_DOC_ID = OD.OT_DOC_ID) ',
+
+                'FROM PAYROLL_DEDUCTION_ITEM PDI ' .
+                  'LEFT OUTER JOIN OT_DOCUMENT OD ON (PDI.OT_DOC_ID = OD.OT_DOC_ID) ', 
                   
     );
 
@@ -113,6 +134,8 @@ class MPayrollDeductionItem extends MBaseModel
                 'GROUP BY OD.EMPLOYEE_ID, PEI.DEDUCTION_TYPE, YYYYMM ORDER BY OD.EMPLOYEE_ID ASC ',
 
                 'GROUP BY OD.EMPLOYEE_ID, PEI.DEDUCTION_TYPE, YYYY ORDER BY OD.EMPLOYEE_ID ASC ',
+
+                'ORDER BY OD.DOCUMENT_DATE ASC, PDI.DEDUCTION_DATE ASC, PDI.DEDUCTION_TYPE ASC ',
     );
 
     function __construct($db) 
