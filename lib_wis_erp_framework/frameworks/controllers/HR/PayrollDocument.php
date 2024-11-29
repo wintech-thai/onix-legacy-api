@@ -212,7 +212,29 @@ class PayrollDocument extends CBaseController
         self::PopulateRow($p, $cnt, 1, 'EMPLOYEE_PAYROLL_ACCUM_LIST', $rows);
 
         return([$param, $p]);
-    }    
+    }
+
+    public static function GetEmployeeDeductionList($db, $param, $data)
+    {
+//CSql::SetDumpSQL(true);
+        $startDate = $data->getFieldValue('START_DATE');
+
+        $year = substr($startDate, 0, 4);
+        $fromDate = sprintf("%s/01/01 00:00:00", $year); //1st date of year
+        $toDate = sprintf("%s/12/31 23:59:59", $year); //end of year
+
+        $data->setFieldValue('FROM_DOCUMENT_DATE', $fromDate);
+        $data->setFieldValue('TO_DOCUMENT_DATE', $toDate);
+
+        $u = new MPayrollDeductionItem($db);
+
+        list($cnt, $rows) = $u->Query(6, $data);
+
+        $p = new CTable($u->GetTableName());
+        self::PopulateRow($p, $cnt, 1, 'EMPLOYEE_PAYROLL_DEDUCTION_LIST', $rows);
+
+        return([$param, $p]);
+    }
 }
 
 ?>

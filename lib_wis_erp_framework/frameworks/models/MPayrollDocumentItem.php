@@ -48,6 +48,7 @@ class MPayrollDocumentItem extends MBaseModel
                     'ENDING_TOTAL_DEFINITION:S:ENDING_TOTAL_DEFINITION:N',
                     'ENDING_YEAR_DEFINITION:S:ENDING_YEAR_DEFINITION:N',
                     'PAYROLL_NOTE:S:PAYROLL_NOTE:N',
+                    'HIRING_RATE:NZ:HIRING_RATE:N',
 
                     'CREATE_DATE:CD:CREATE_DATE:N',
                     'MODIFY_DATE:MD:MODIFY_DATE:N',
@@ -91,6 +92,7 @@ class MPayrollDocumentItem extends MBaseModel
                     'PDI.ENDING_TOTAL_DEFINITION:S:ENDING_TOTAL_DEFINITION:N',
                     'PDI.ENDING_YEAR_DEFINITION:S:ENDING_YEAR_DEFINITION:N',
                     'PDI.PAYROLL_NOTE:S:PAYROLL_NOTE:N',
+                    'PDI.HIRING_RATE:NZ:HIRING_RATE:N',
 
                     'EM.EMPLOYEE_CODE:S:EMPLOYEE_CODE:N',
                     'EM.EMPLOYEE_NAME:S:EMPLOYEE_NAME:N',
