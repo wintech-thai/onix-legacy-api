@@ -42,6 +42,7 @@ class MEmployee extends MBaseModel
                     'HIRING_FLAG:S:HIRING_FLAG:Y',
                     'FEE_TELEPHONE:NZ:FEE_TELEPHONE:N',
                     'FEE_POSITION:NZ:FEE_POSITION:N',
+                    'FEE_VEHICLE:NZ:FEE_VEHICLE:N',
                     'CFG_TAX:NZ:CFG_TAX:N',
                     'EMPLOYEE_ADDRESS:S:EMPLOYEE_ADDRESS:N',
 
@@ -100,6 +101,7 @@ class MEmployee extends MBaseModel
                     'EP.HIRING_FLAG:S:HIRING_FLAG:Y',
                     'EP.FEE_TELEPHONE:NZ:FEE_TELEPHONE:N',
                     'EP.FEE_POSITION:NZ:FEE_POSITION:N',
+                    'EP.FEE_VEHICLE:NZ:FEE_VEHICLE:N',
                     'EP.CFG_TAX:NZ:CFG_TAX:N',
                     'EP.HIRING_DATE:S:HIRING_DATE:N',
                     'EP.EMPLOYEE_ADDRESS:S:EMPLOYEE_ADDRESS:N',
