@@ -46,8 +46,10 @@ class MOtDocumentItem extends MBaseModel
                     'WORK_ADJUST_HOUR:NZ:WORK_ADJUST_HOUR:N',
                     'WORK_HOUR:NZ:WORK_HOUR:N',
                     'WORK_ADJUSTED_TOTAL_HOUR:NZ:WORK_ADJUSTED_TOTAL_HOUR:N',
+                    'DEDUCT_PENALTY_PENDING:NZ:DEDUCT_PENALTY_PENDING:N',
+                    'ACTUAL_LEAVE_DEDUCT_FLAG:S:ACTUAL_LEAVE_DEDUCT_FLAG:N',
                     'RECEIVE_TYPE:S:RECEIVE_TYPE:N',
-                    
+
                     'CREATE_DATE:CD:CREATE_DATE:N',
                     'MODIFY_DATE:MD:MODIFY_DATE:N',
                   ],

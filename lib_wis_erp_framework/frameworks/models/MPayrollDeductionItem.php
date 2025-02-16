@@ -94,7 +94,8 @@ class MPayrollDeductionItem extends MBaseModel
                     'PDI.DURATION_HINT:S:DURATION_HINT:N',
                     
                     'OD.DOCUMENT_DATE:FD:FROM_DOCUMENT_DATE:Y',
-                    'OD.DOCUMENT_DATE:TD:TO_DOCUMENT_DATE:Y',     
+                    'OD.DOCUMENT_DATE:TD:TO_DOCUMENT_DATE:Y',   
+                    'OD.ACTUAL_LEAVE_DEDUCT_FLAG:S:ACTUAL_LEAVE_DEDUCT_FLAG:N',
                   ],
     );
 

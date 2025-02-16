@@ -49,6 +49,8 @@ class MPayrollDocumentItem extends MBaseModel
                     'ENDING_YEAR_DEFINITION:S:ENDING_YEAR_DEFINITION:N',
                     'PAYROLL_NOTE:S:PAYROLL_NOTE:N',
                     'HIRING_RATE:NZ:HIRING_RATE:N',
+                    'DEDUCT_PENALTY_PENDING:NZ:DEDUCT_PENALTY_PENDING:N',
+                    'ACTUAL_LEAVE_DEDUCT_FLAG:S:ACTUAL_LEAVE_DEDUCT_FLAG:N',
 
                     'CREATE_DATE:CD:CREATE_DATE:N',
                     'MODIFY_DATE:MD:MODIFY_DATE:N',
@@ -93,6 +95,8 @@ class MPayrollDocumentItem extends MBaseModel
                     'PDI.ENDING_YEAR_DEFINITION:S:ENDING_YEAR_DEFINITION:N',
                     'PDI.PAYROLL_NOTE:S:PAYROLL_NOTE:N',
                     'PDI.HIRING_RATE:NZ:HIRING_RATE:N',
+                    'PDI.DEDUCT_PENALTY_PENDING:NZ:DEDUCT_PENALTY_PENDING:N',
+                    'PDI.ACTUAL_LEAVE_DEDUCT_FLAG:S:ACTUAL_LEAVE_DEDUCT_FLAG:N',
 
                     'EM.EMPLOYEE_CODE:S:EMPLOYEE_CODE:N',
                     'EM.EMPLOYEE_NAME:S:EMPLOYEE_NAME:N',
@@ -170,7 +174,9 @@ class MPayrollDocumentItem extends MBaseModel
                     'PDI.DEDUCT_COVERAGE:NZ:DEDUCT_COVERAGE:N',
                     'PDI.RECEIVE_OTHERS_TOTAL:NZ:RECEIVE_OTHERS_TOTAL:N',
                     'PDI.GRAND_TOTAL_AMOUNT:NZ:GRAND_TOTAL_AMOUNT:N',
-
+                    'PDI.DEDUCT_PENALTY_PENDING:NZ:DEDUCT_PENALTY_PENDING:N',
+                    'PDI.ACTUAL_LEAVE_DEDUCT_FLAG:S:ACTUAL_LEAVE_DEDUCT_FLAG:N',
+                    
                     'PD.EMPLOYEE_TYPE:REFID:EMPLOYEE_TYPE:Y',
                     'PD.FROM_SALARY_DATE:S:FROM_SALARY_DATE:N',
                     'PD.TO_SALARY_DATE:S:TO_SALARY_DATE:N',

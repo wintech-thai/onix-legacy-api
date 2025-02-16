@@ -30,6 +30,7 @@ class MOtDocument extends MBaseModel
                     'WORKED_AMOUNT_TOTAL:NZ:WORKED_AMOUNT_TOTAL:N',
                     'ADJUST_AMOUNT:NZ:ADJUST_AMOUNT:N', 
                     'OT_ADJUST_AMOUNT:NZ:OT_ADJUST_AMOUNT:N', 
+                    'ACTUAL_LEAVE_DEDUCT_FLAG:S:ACTUAL_LEAVE_DEDUCT_FLAG:Y',
 
                     'DEDUCTION_MINUTE_TOTAL_1:NZ:DEDUCTION_MINUTE_TOTAL_1:N',                    
                     'DEDUCTION_AMOUNT_1:NZ:DEDUCTION_AMOUNT_1:N',                   
@@ -70,6 +71,7 @@ class MOtDocument extends MBaseModel
                     'OD.WORKED_AMOUNT_TOTAL:NZ:WORKED_AMOUNT_TOTAL:N',
                     'OD.ADJUST_AMOUNT:NZ:ADJUST_AMOUNT:N', 
                     'OD.OT_ADJUST_AMOUNT:NZ:OT_ADJUST_AMOUNT:N', 
+                    'OD.ACTUAL_LEAVE_DEDUCT_FLAG:S:ACTUAL_LEAVE_DEDUCT_FLAG:Y',
 
                     'OD.DEDUCTION_MINUTE_TOTAL_1:NZ:DEDUCTION_MINUTE_TOTAL_1:N',                    
                     'OD.DEDUCTION_AMOUNT_1:NZ:DEDUCTION_AMOUNT_1:N',                   
@@ -107,8 +109,9 @@ class MOtDocument extends MBaseModel
                   [ # 3 For Get EMPLOYEE_DEDUCTION
                     'OD.EMPLOYEE_ID:REFID:EMPLOYEE_ID:Y',
                     'OD.DEDUCTION_AMOUNT:NZ:AMOUNT:N',  
-                    'OD.EMPLOYEE_ID:REFID:EMPLOYEE_ID:Y',   
-                    
+                    'OD.EMPLOYEE_ID:REFID:EMPLOYEE_ID:Y',
+                    'OD.ACTUAL_LEAVE_DEDUCT_FLAG:S:ACTUAL_LEAVE_DEDUCT_FLAG:Y',
+
                     'OD.DEDUCTION_MINUTE_TOTAL_1:NZ:DEDUCTION_MINUTE_TOTAL_1:N',                    
                     'OD.DEDUCTION_AMOUNT_1:NZ:DEDUCTION_AMOUNT_1:N',                   
                     'OD.DEDUCTION_HOUR_ROUNDED_TOTAL_1:NZ:DEDUCTION_HOUR_ROUNDED_TOTAL_1:N',

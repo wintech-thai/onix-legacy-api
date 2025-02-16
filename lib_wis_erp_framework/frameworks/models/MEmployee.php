@@ -40,8 +40,12 @@ class MEmployee extends MBaseModel
                     'SALARY:NZ:SALARY:N',
                     'RESIGNED_FLAG:S:RESIGNED_FLAG:Y',
                     'HIRING_FLAG:S:HIRING_FLAG:Y',
+                    'FEE_TELEPHONE:NZ:FEE_TELEPHONE:N',
+                    'FEE_POSITION:NZ:FEE_POSITION:N',
+                    'FEE_VEHICLE:NZ:FEE_VEHICLE:N',
+                    'CFG_TAX:NZ:CFG_TAX:N',
                     'EMPLOYEE_ADDRESS:S:EMPLOYEE_ADDRESS:N',
-                                        
+
                     'NAME_PREFIX:REFID:NAME_PREFIX:N',
                     'GENDER:REFID:GENDER:N',
                     'EMPLOYEE_POSITION:REFID:EMPLOYEE_POSITION:N',
@@ -95,6 +99,10 @@ class MEmployee extends MBaseModel
                     'EP.SALARY:NZ:SALARY:N',
                     'EP.RESIGNED_FLAG:S:RESIGNED_FLAG:Y',
                     'EP.HIRING_FLAG:S:HIRING_FLAG:Y',
+                    'EP.FEE_TELEPHONE:NZ:FEE_TELEPHONE:N',
+                    'EP.FEE_POSITION:NZ:FEE_POSITION:N',
+                    'EP.FEE_VEHICLE:NZ:FEE_VEHICLE:N',
+                    'EP.CFG_TAX:NZ:CFG_TAX:N',
                     'EP.HIRING_DATE:S:HIRING_DATE:N',
                     'EP.EMPLOYEE_ADDRESS:S:EMPLOYEE_ADDRESS:N',
 
@@ -107,7 +115,7 @@ class MEmployee extends MBaseModel
                     'EP.MODIFY_DATE:MD:MODIFY_DATE:N'
                   ],  
                                                                                                                 
-              
+
     );
 
     private $froms = array(
