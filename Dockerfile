@@ -62,3 +62,4 @@ RUN cat /tmp/alias.conf >> /etc/apache2/apache2.conf
 ENV WIS_CORE_ENCRYPTED=false
 
 ENTRYPOINT ["/wis/system/bin/start.bash"]
+
