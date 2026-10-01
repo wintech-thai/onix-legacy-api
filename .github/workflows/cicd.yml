@@ -148,7 +148,7 @@ jobs:
         git config --global user.email "cicd-auto@wintech-thai.com"
         git config --global user.name "CICD"
 
-        git clone "https://cicd-token:${GH_TOKEN}@github.com/wintech-thai/onix-argocd-apps.git" deployment
+        git clone "https://cicd-token:${GH_TOKEN}@github.com/wintech-thai/onix-legacy-control-plane.git" deployment
         cd deployment
         git checkout ${ARGOCD_BRANCH}
         cp ${VALUE_FILE_DIR}/onix-legacy-api-02-image-tag-template.yaml ${VALUE_FILE}
@@ -156,7 +156,7 @@ jobs:
         ls -lrt
         cat ${VALUE_FILE}
 
-        #### git add ${VALUE_FILE}; git commit --m "Update image tag by auto deploy script"; git push
+        git add ${VALUE_FILE}; git commit --m "Update image tag by auto deploy script"; git push
 
     - name: Discord notification end
       if: always()
