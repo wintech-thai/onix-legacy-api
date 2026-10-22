@@ -131,9 +131,17 @@ class CDispatcher
     {
         $funcName = $param->getFieldValue("FUNCTION_NAME");
        
-        //Hash/Assoc Array            
-        $whoCanRun = $config['WhoCanRun'];
-        $channel = $config['Channel'];            
+        // Hash/Assoc Array
+        if (is_array($config)) 
+        {
+            $whoCanRun = $config['WhoCanRun'] ?? null;
+            $channel = $config['Channel'] ?? null;
+        }
+        else 
+        {
+            $whoCanRun = null;
+            $channel = null;
+        }
 
         $forAdmin = false;
         if ($whoCanRun == 'admin')
