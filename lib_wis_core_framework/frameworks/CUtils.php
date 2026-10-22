@@ -402,7 +402,7 @@ class CUtils
     public static function ProcessRequest($xml)
     {
         //Prevent XXE - XML External Entity 
-        libxml_disable_entity_loader(true);
+        //libxml_disable_entity_loader(true); //No need in PHP 8.0 and above, this function is deprecated
 
         $doc = new DOMDocument();
         $doc->loadXML($xml);
