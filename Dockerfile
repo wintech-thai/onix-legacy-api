@@ -1,70 +1,93 @@
-FROM php:7.2-apache
+FROM php:8.4.27-apache
+
 ARG BUILD_VERSION
 
-RUN a2enmod rewrite && a2enmod ssl
+# Enable Apache modules
+RUN a2enmod rewrite ssl
 
-RUN sed -i 's|deb.debian.org/debian|archive.debian.org/debian|g' /etc/apt/sources.list \
-    && sed -i 's|security.debian.org/debian-security|archive.debian.org/debian-security|g' /etc/apt/sources.list \
-    && sed -i '/buster-updates/d' /etc/apt/sources.list \
-    && apt-get update
-
-RUN apt-get update && apt-get install -y \
+# Install system dependencies and PHP extensions
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
         libfreetype6-dev \
         libjpeg62-turbo-dev \
         libpng-dev \
         libpq-dev \
         vim \
-    && docker-php-ext-install -j$(nproc) iconv \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd \
-    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo pdo_pgsql pgsql 
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j"$(nproc)" \
+        iconv \
+        gd \
+        pdo \
+        pdo_pgsql \
+        pgsql \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN useradd apache2
-RUN usermod -u 69690 apache2
-RUN groupmod -g 69690 apache2
+# Create application user and group
+RUN groupadd --gid 69690 apache2 \
+    && useradd --uid 69690 --gid apache2 --create-home apache2
 
-RUN mkdir -p /home/apache2
-RUN chown apache2:apache2 /home/apache2
+ENV APACHE_RUN_USER=apache2
+ENV APACHE_RUN_GROUP=apache2
 
-ENV APACHE_RUN_USER apache2
-ENV APACHE_RUN_GROUP apache2
+# Apache port configuration
+RUN echo ': ${PORT:=80}' >> /etc/apache2/envvars \
+    && echo 'export PORT' >> /etc/apache2/envvars
 
-RUN echo ': ${PORT:=80}' >> /etc/apache2/envvars
-RUN echo 'export PORT' >> /etc/apache2/envvars
-COPY ports.conf /etc/apache2
+COPY ports.conf /etc/apache2/ports.conf
 
-# Allow create .phar file
-RUN echo 'phar.readonly=0' >> /usr/local/etc/php/conf.d/docker-php-phar-readonly.ini
+# Allow creating PHAR archives
+RUN echo 'phar.readonly=0' \
+    > /usr/local/etc/php/conf.d/docker-php-phar-readonly.ini
 
-#####
+# Application directories
+RUN mkdir -p \
+        /wis/system/bin \
+        /wis/windows \
+        /wis/data/sessions \
+        /wis/data/wip \
+        /wis/data/locked \
+        /wis/data/storage \
+    && chown -R apache2:apache2 \
+        /wis/system \
+        /wis/windows \
+        /wis/data \
+        /home/apache2
 
-RUN mkdir -p /wis/system/bin
-RUN mkdir -p /wis/windows
-RUN chown apache2:apache2 /wis/system /wis/system/bin /wis/windows
-RUN mkdir -p /wis/data/sessions /wis/data/wip /wis/data/locked /wis/data/storage
-RUN chown apache2:apache2 /wis/data/sessions /wis/data/wip /wis/data/locked /wis/data/storage
-
+# Build WIS Core Framework
 WORKDIR /build/lib_wis_core_framework
-COPY lib_wis_core_framework/ .
-RUN mkdir -p build
-RUN php onix_core_framework_build.php
-RUN cp build/onix_core_framework.phar /wis/system/bin
 
+COPY lib_wis_core_framework/ ./
+
+RUN mkdir -p build \
+    && php onix_core_framework_build.php \
+    && cp build/onix_core_framework.phar /wis/system/bin/
+
+# Build WIS ERP Framework
 WORKDIR /build/lib_wis_erp_framework
-COPY lib_wis_erp_framework/ .
-RUN mkdir -p build
-RUN php onix_erp_framework_build.php
-RUN cp build/onix_erp_framework.phar /wis/system/bin
 
-COPY onix_server_scripts/* /wis/system/bin/
-RUN sed -i "s#VERSION_HERE#${BUILD_VERSION}#g" /wis/system/bin/build.php
-RUN ls -al /wis/system/bin; cat /wis/system/bin/build.php
+COPY lib_wis_erp_framework/ ./
 
-COPY alias.conf /tmp
-RUN cat /tmp/alias.conf >> /etc/apache2/apache2.conf
+RUN mkdir -p build \
+    && php onix_erp_framework_build.php \
+    && cp build/onix_erp_framework.phar /wis/system/bin/
+
+# Copy application scripts
+COPY onix_server_scripts/ /wis/system/bin/
+
+RUN sed -i "s#VERSION_HERE#${BUILD_VERSION}#g" \
+        /wis/system/bin/build.php \
+    && ls -al /wis/system/bin \
+    && cat /wis/system/bin/build.php
+
+# Apache aliases
+COPY alias.conf /tmp/alias.conf
+
+RUN cat /tmp/alias.conf >> /etc/apache2/apache2.conf \
+    && rm /tmp/alias.conf
 
 ENV WIS_CORE_ENCRYPTED=false
 
-ENTRYPOINT ["/wis/system/bin/start.bash"]
+WORKDIR /
 
+ENTRYPOINT ["/wis/system/bin/start.bash"]
