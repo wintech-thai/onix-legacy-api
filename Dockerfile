@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:8.4.27-apache
 ARG BUILD_VERSION
 
 RUN a2enmod rewrite && a2enmod ssl
