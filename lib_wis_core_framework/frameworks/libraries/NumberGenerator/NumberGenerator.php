@@ -245,7 +245,7 @@ class NumberGenerator extends CBaseController
       
       foreach ($hash as $key => $value)
       {
-          $subValue = str_replace($key, $value ,$subValue);
+          $subValue = str_replace($key, (string) $value, $subValue);
       }
       
       #Update value back 
