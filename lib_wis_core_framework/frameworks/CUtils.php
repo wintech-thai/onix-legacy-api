@@ -344,10 +344,12 @@ class CUtils
     
         $dt = new DateTime("$yyyy/$mm/$dd");
         $new_dt;
-    
-        $interval = new DateInterval('P' . abs($offset) . 'D');
 
-        if ($offset < 0)
+        $intOffset = intval($offset);
+    
+        $interval = new DateInterval('P' . abs($intOffset) . 'D');
+
+        if ($intOffset < 0)
         {
             $new_dt = $dt->sub($interval);
         }
